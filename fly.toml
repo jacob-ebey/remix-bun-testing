@@ -1,0 +1,46 @@
+# fly.toml file generated for bun-remix-test on 2022-07-05T18:43:43-07:00
+
+app = "bun-remix-test"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+DB_FILE = "/data/db.sqlite"
+NODE_ENV = "production"
+
+[mounts]
+destination = "/data"
+source = "bun_remix_test_db_volume"
+
+[experimental]
+allowed_public_ports = []
+auto_rollback = true
+
+[[services]]
+http_checks = []
+internal_port = 3000
+processes = ["app"]
+protocol = "tcp"
+script_checks = []
+
+[services.concurrency]
+hard_limit = 25
+soft_limit = 20
+type = "connections"
+
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
+
+[[services.tcp_checks]]
+grace_period = "1s"
+interval = "15s"
+restart_limit = 0
+timeout = "2s"

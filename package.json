@@ -8,15 +8,15 @@
     "dev": "run-p dev:*"
   },
   "dependencies": {
-    "@remix-run/react": "^1.6.3",
-    "@remix-run/server-runtime": "^1.6.3",
+    "@remix-run/react": "0.0.0-experimental-43ebb527",
+    "@remix-run/server-runtime": "0.0.0-experimental-43ebb527",
     "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-flat-routes": "^0.4.3"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.6.3",
+    "@remix-run/dev": "0.0.0-experimental-43ebb527",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.6",

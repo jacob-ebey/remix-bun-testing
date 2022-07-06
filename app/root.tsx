@@ -91,7 +91,7 @@ function App({ children }: React.PropsWithChildren<{}>) {
           <h1>{Meta.create().title}</h1>
           <nav>
             <RemixReact.Link to="/">Home</RemixReact.Link> /{" "}
-            <RemixReact.Link to="/profile">Profile</RemixReact.Link>
+            <RemixReact.Link to="/counter">Counter</RemixReact.Link>
           </nav>
         </header>
         {children}
@@ -123,7 +123,7 @@ export function CatchBoundary() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
-  console.error(error);
+  console.log(error);
 
   return (
     <App>
