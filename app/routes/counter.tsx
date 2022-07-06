@@ -7,16 +7,16 @@ type LoaderData = {
 };
 
 export const loader: RemixServer.LoaderFunction = () => {
-  let row = db
+  const row = db
     .query<any, { count: number }>(`SELECT count FROM counter WHERE id = 1`)
     .get();
-  let count = row?.count || 0;
+  const count = row?.count || 0;
 
   return { count };
 };
 
 export default function Counter() {
-  let { count } = RemixReact.useLoaderData<LoaderData>();
+  const { count } = RemixReact.useLoaderData<LoaderData>();
 
   return (
     <main>

@@ -1,8 +1,8 @@
 import type { HtmlMetaDescriptor } from "@remix-run/server-runtime";
 
-let defaultTitle = "Remix Bun.js";
-let titleTemplate = `${defaultTitle} | %s`;
-let defaultDescription = "A example of Remix running on Bun.js.";
+const defaultTitle = "Remix Bun.js";
+const titleTemplate = `${defaultTitle} | %s`;
+const defaultDescription = "A example of Remix running on Bun.js.";
 
 export function create({
   title,

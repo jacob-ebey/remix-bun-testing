@@ -54,7 +54,7 @@ function liveReload<TFunc extends Function>(callback: TFunc) {
   const registry = new Map([...Loader.registry.entries()]);
   function reload() {
     if (Loader.registry.size !== registry.size) {
-      for (let key of Loader.registry.keys()) {
+      for (const key of Loader.registry.keys()) {
         if (!registry.has(key)) {
           Loader.registry.delete(key);
         }

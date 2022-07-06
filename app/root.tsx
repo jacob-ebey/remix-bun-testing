@@ -5,15 +5,15 @@ import NProgress from "nprogress";
 import nProgressStylesHref from "nprogress/nprogress.css";
 import * as Meta from "~/meta";
 
-export let meta: RemixServer.MetaFunction = () => Meta.create();
+export const meta: RemixServer.MetaFunction = () => Meta.create();
 
 function App({ children }: React.PropsWithChildren<{}>) {
-  let transition = RemixReact.useTransition();
-  let fetchers = RemixReact.useFetchers();
+  const transition = RemixReact.useTransition();
+  const fetchers = RemixReact.useFetchers();
 
-  let state = React.useMemo<"idle" | "loading">(
+  const state = React.useMemo<"idle" | "loading">(
     function getGlobalState() {
-      let states = [
+      const states = [
         transition.state,
         ...fetchers.map((fetcher) => fetcher.state),
       ];
@@ -112,7 +112,7 @@ export default function Root() {
 }
 
 export function CatchBoundary() {
-  let caught = RemixReact.useCatch();
+  const caught = RemixReact.useCatch();
 
   return (
     <App>
