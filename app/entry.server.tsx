@@ -1,6 +1,6 @@
 import type * as RemixServer from "@remix-run/server-runtime";
 import * as RemixReact from "@remix-run/react";
-import { renderToReadableStream } from "react-dom/server";
+import { renderToString } from "react-dom/server";
 
 export default async function handleRequest(
   request: Request,
@@ -8,13 +8,13 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: RemixServer.EntryContext
 ) {
-  let body = await renderToReadableStream(
+  const markup = renderToString(
     <RemixReact.RemixServer context={remixContext} url={request.url} />
   );
 
   responseHeaders.set("Content-Type", "text/html");
 
-  return new Response(body as any, {
+  return new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
     headers: responseHeaders,
   });
