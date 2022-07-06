@@ -1,0 +1,6 @@
+node_modules
+
+# Remix output
+.cache
+/build/
+/public/build/

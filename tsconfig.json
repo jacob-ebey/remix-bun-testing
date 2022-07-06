@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "module": "esnext",
+    "target": "esnext",
+    "types": ["bun-types", "@remix-run/dev"],
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "resolveJsonModule": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"]
+}
