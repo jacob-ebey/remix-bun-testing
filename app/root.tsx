@@ -7,9 +7,35 @@ import * as Meta from "~/meta";
 
 export const meta: RemixServer.MetaFunction = () => Meta.create();
 
+let latencyTotal = 0;
+let latencyCount = 0;
+let onLatencyChange: undefined | ((latency: number) => void);
+if (typeof document !== "undefined") {
+  const originalFetch = window.fetch;
+  window.fetch = (async (...args) => {
+    let start = Date.now();
+    let response = await originalFetch(...args);
+    let end = Date.now();
+
+    latencyCount++;
+    latencyTotal += end - start;
+    onLatencyChange?.(latencyTotal / latencyCount);
+
+    return response;
+  }) as typeof fetch;
+}
+
 function App({ children }: React.PropsWithChildren<{}>) {
   const transition = RemixReact.useTransition();
   const fetchers = RemixReact.useFetchers();
+  const [latency, setLatency] = React.useState(0);
+
+  React.useEffect(() => {
+    onLatencyChange = setLatency;
+    return () => {
+      onLatencyChange = undefined;
+    };
+  }, []);
 
   const state = React.useMemo<"idle" | "loading">(
     function getGlobalState() {
@@ -91,7 +117,8 @@ function App({ children }: React.PropsWithChildren<{}>) {
           <h1>{Meta.create().title}</h1>
           <nav>
             <RemixReact.Link to="/">Home</RemixReact.Link> /{" "}
-            <RemixReact.Link to="/counter">Counter</RemixReact.Link>
+            <RemixReact.Link to="/counter">Counter</RemixReact.Link> /{" "}
+            <span>Latency: {latency === 0 ? "?" : latency.toFixed(2)}ms</span>
           </nav>
         </header>
         {children}
