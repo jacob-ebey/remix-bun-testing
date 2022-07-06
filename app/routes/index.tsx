@@ -1,3 +1,5 @@
+import * as RemixReact from "@remix-run/react";
+
 export default function Index() {
   return (
     <main>
@@ -19,6 +21,11 @@ export default function Index() {
           Fly.io
         </a>{" "}
         with a volume to store a SQLite DB.
+      </p>
+      <p>
+        Head over to the{" "}
+        <RemixReact.Link to="/counter">counter page</RemixReact.Link> to view{" "}
+        <code>bun:sqlite</code> in action.
       </p>
     </main>
   );
