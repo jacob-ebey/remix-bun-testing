@@ -1,7 +1,6 @@
-import { heapStats } from "bun:jsc"
 import type * as RemixServer from "@remix-run/server-runtime";
 import * as RemixReact from "@remix-run/react";
-import { renderToString } from "react-dom/server";
+import { renderToReadableStream } from "react-dom/server";
 
 export default async function handleRequest(
   request: Request,
@@ -9,14 +8,13 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: RemixServer.EntryContext
 ) {
-  console.log(heapStats());
-  let markup = renderToString(
+  let body = await renderToReadableStream(
     <RemixReact.RemixServer context={remixContext} url={request.url} />
   );
 
   responseHeaders.set("Content-Type", "text/html");
 
-  return new Response("<!DOCTYPE html>" + markup, {
+  return new Response(body as any, {
     status: responseStatusCode,
     headers: responseHeaders,
   });
