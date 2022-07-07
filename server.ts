@@ -9,8 +9,8 @@ const mode = process.argv[2] === "dev" ? "development" : "production";
 let requestHandler = createRequestHandler(build, mode);
 
 setInterval(() => {
-  Bun.gc(false);
-}, 10000);
+  Bun.gc(true);
+}, 9000);
 
 async function handler(request: Request): Promise<Response> {
   if (mode === "development") {
