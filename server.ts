@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import { heapStats } from "bun:jsc";
 
 import { createRequestHandler } from "@remix-run/server-runtime";
 import * as build from "./build";
@@ -9,8 +8,11 @@ const mode = process.argv[2] === "dev" ? "development" : "production";
 
 let requestHandler = createRequestHandler(build, mode);
 
+setInterval(() => {
+  Bun.gc(false);
+}, 10000);
+
 async function handler(request: Request): Promise<Response> {
-  heapStats();
   if (mode === "development") {
     let newBuild = await import("./build"); // <- This is the segfault source
     requestHandler = createRequestHandler(newBuild, mode);

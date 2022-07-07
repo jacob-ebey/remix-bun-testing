@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable"],
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "module": "esnext",
     "target": "esnext",
-    "types": ["bun-types", "@remix-run/dev"],
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "baseUrl": ".",
@@ -18,5 +17,6 @@
     "noEmit": true,
     "resolveJsonModule": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }
